@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seisiview"
+
+license = "GPL-3.0-or-later"
+
+license-files = ["LICEN[CS]E*"]
+
+dynamic = ["version"]
+
+authors = [
+  { name="Thomas Hertweck", email="geophysics@email.de" },
+]
+
+maintainers = [
+  { name="Thomas Hertweck", email="geophysics@email.de" },
+]
+
+description = "Interactive seismic data visualization."
+
+readme = "README.md"
+
+requires-python = ">=3.10"
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "matplotlib",
+  "numpy",
+  "seisio",
+  "tabulate",
+  "tktooltip", 
+  "ttkbootstrap", 
+  "ttkbootstrap-icons", 
+  "ttkbootstrap-icons-bs",
+]
+
+keywords = [
+  "seismic",
+  "SU",
+  "SEGY", "SEG-Y",
+  "GUI",
+  "visualization",
+]
+
+[project.urls]
+Repository = "https://gitlab.kit.edu/thomas.hertweck/seisio"
+
+[tool.setuptools.dynamic]
+version = { attr = "seisiview.__version__" }
+
+[tool.setuptools]
+include-package-data = true
+
+package-dir = { "" = "./" }
+
+[project.scripts]
+seisiview = "seisiview.dataviewer:main"
