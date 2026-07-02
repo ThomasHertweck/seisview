@@ -54,7 +54,7 @@ This version is intended for experts who would like to test the latest version o
 $> git clone https://gitlab.kit.edu/thomas.hertweck/seisview.git
 ```
 
-Once you acquired the source, you can install an editable version of seisiview with:
+Once you acquired the source, you can install an editable version of seisview with:
 
 ```
 $> cd seisview
@@ -100,7 +100,7 @@ Hertweck, T. (2026). seisview: A Python GUI for interactive visualization of sei
 ```
 Adjust year, version and last visited date as required. Here's a BibTeX entry:
 ```
-@software{seisio,
+@software{seisview,
   author  = {Hertweck, Thomas},
   year    = {2026},
   title   = {seisview: A {P}ython {GUI} for interactive visualization of seismic data},
