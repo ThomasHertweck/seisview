@@ -68,7 +68,9 @@ An alternative location of the source is https://github.com/ThomasHertweck/seisv
 Here is a screenshot of the GUI with some explanations:
 
 <p align="center">
+
 ![seisview GUI](./img/seisview.jpg)
+
 </p>
 
 Note that, due to the nature of how matplotlib works, creating wiggle displays of seismic data (basically, lots of line plots) is slower than creating a variable-density plot (in principle a single imshow function call); **seisview** uses some tricks to speed up the wiggle displays but in particular for gathers with many traces, you may have to wait a few moments. Creating the seismic lookup index might also take some time, dependent on how large your input data set is and how fast your hardware. **seisio** usually is pretty fast reading data from local disk but keep in mind that possibly many trace headers have to be read in order to create the lookup index. The GUI will respond during this time as the indexing is handled as a separate CPU thread.
