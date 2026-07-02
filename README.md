@@ -32,6 +32,14 @@ The **seisio** packages requires: numba, numpy, pandas, tabulate
 $> pip install seisview
 ```
 
+Afterwards, simply call
+
+```
+$> seisview
+```
+
+at the commandline. You can use option `-v` to obtain additional logging information or `-vv` to put all modules that use the standard logging facility into debug mode, including **seisview** itself.
+
 *Install directly from gitlab:*
 
 ```
