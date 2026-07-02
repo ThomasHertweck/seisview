@@ -6,19 +6,21 @@ Interactive seismic data visualization.
 
 The **seisview** package provides an interactive GUI for seismic data visualization, including velocity models. It can load 2D or 3D SEG-Y or SU data and present slices of data in an interactive way. 
 
+This little program is not meant to replace graphics workstations and commercial seismic software optimized to load and display large amounts of data. It's primarily meant to have a quick look at prestack/poststack 2D data or poststack 3D data (although it can also work with 3D prestack data) and was originally written to support lectures and exercises in an academic environment.
+
 ## Key features
 
 * Pure Python code based on tkinter, i.e., minimal external dependencies.
-* Uses the **seisio** module for I/O of seismic data.
+* Uses the **seisio** module for flexible I/O of seismic data.
 * Data can be loaded in user-defined ways, independent on the sort order of the data on disk.
-* GUI allows users to interactively change clips, axis labels, axis ticks, colormaps, and many more parameters. 
-* Works on Linux and Windows equally well.
+* GUI allows users to interactively change clips, axis labels, axis ticks, colormaps, and many more parameters.
+* Tries to be OS-independent, i.e., should work on Linux, Windows, etc.
 
 ## Getting Started
 
 ### Dependencies
 
-Required: matplotlib, numpy, seisio, tktooltip, ttkbootstrap, ttkbootstrap-icons, ttkbootstrap-icons-bs
+Required: matplotlib, numpy, seisio, tabulate, tkinter-tooltip, ttkbootstrap, ttkbootstrap-icons, ttkbootstrap-icons-bs
 
 The **seisio** packages requires: numba, numpy, pandas, tabulate
 
@@ -55,16 +57,28 @@ An alternative location of the source is https://github.com/ThomasHertweck/seisv
 
 ## Overview
 
+Here is a screenshot of the GUI with some explanations:
+
 <p align="center">
-
 ![seisview GUI](./img/seisview.jpg)
-
 </p>
 
+Note that, due to the nature of how matplotlib works, creating wiggle displays of seismic data (basically, lots of line plots) is slower than creating a variable-density plot (in principle a single imshow function call); **seisview** uses some tricks to speed up the wiggle displays but in particular for gathers with many traces, you may have to wait a few moments. Creating the seismic lookup index might also take some time, dependent on how large your input data set is and how fast your hardware. **seisio** usually is pretty fast reading data from local disk but keep in mind that possibly many trace headers have to be read in order to create the lookup index. The GUI will respond during this time as the indexing is handled as a separate CPU thread.
+
+The entry fields (like the ensemble trace header keys, the percentile clip or the colormap selection) are writable, i.e., a user can enter his own ensemble sort order or any standard matplotlib colormap. Once the lookup index has been created, a list of ensembles will be presented in the selection box at the top of the GUI. Again, the user can type in numbers directly to narrow down the search, the combobox is filtered automatically as the user enters numbers.
+
+A sort order of "XLINE / ILINE" means ensembles are formed by a common XLINE trace header, and within an ensemble traces are sorted by the ILINE trace header. Specifying a single key, e.g., "CDP", means that the entire data set is read and simply sorted by the specified trace header key. **seisview** uses the standard SEGY and SU trace header definitions provided by **seisio**. You can check the available trace header mnemonics for SEGY and SU data by running the following Python commands:
+```
+import seisio
+seisio.log_sgy_default_thdef()
+seisio.log_su_default_thdef()
+```
+
+Zoom functionality, panning etc. is provided by the standard matplotlib toolbar. You can also disply grid lines by using the 'g' and/or 'G' keys (for major and minor grid lines), or save the display to a file on disk in various different formats.
 
 ## Testing
 
-The current version of the **seisview** package has primarily been tested on Linux and Windows using Python 3.14.
+The current version of the **seisview** package has primarily been tested on Linux and Windows using Python 3.13 and 3.14.
 
 ## Main author
 
@@ -83,7 +97,7 @@ Adjust year, version and last visited date as required. Here's a BibTeX entry:
   year    = {2026},
   title   = {seisview: A {P}ython {GUI} for interactive visualization of seismic data},
   url     = {https://gitlab.kit.edu/thomas.hertweck/seisview/},
-  urldate = {2026-07-01},
+  urldate = {2026-07-02},
   version = {0.1.0}
 }
 ```
