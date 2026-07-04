@@ -383,7 +383,7 @@ class DataViewer:
         endianess_options = ["AUTOMATIC", "BIG ENDIAN", "LITTLE ENDIAN"]
         ttk.Label(popup, text="Endianess of input file:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
         endianess_cbo = ttk.Combobox(popup, values=endianess_options)
-        ToolTip(filetype_cbo, msg="Select endianess of input file", delay=1.0)
+        ToolTip(endianess_cbo, msg="Select endianess of input file", delay=1.0)
         endianess_cbo.current(0)
         endianess_cbo.grid(row=1, column=1, padx=10, pady=5)
         filetype_cbo["state"] = "readonly"
