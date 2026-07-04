@@ -420,7 +420,7 @@ class DataViewer:
                           "16 :: 1-byte unsigned integer"]
         ttk.Label(popup, text="SEG-Y data format:").grid(row=5, column=0, padx=10, pady=5, sticky="w")
         format_cbo = ttk.Combobox(popup, values=format_options)
-        ToolTip(filetype_cbo, msg="Select the SEG-Y data format", delay=1.0)
+        ToolTip(format_cbo, msg="Select the SEG-Y data format", delay=1.0)
         format_cbo.current(0)
         format_cbo.grid(row=5, column=1, padx=10, pady=5)
         format_cbo["state"] = "readonly"
