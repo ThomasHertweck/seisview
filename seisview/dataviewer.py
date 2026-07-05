@@ -342,7 +342,7 @@ class DataViewer:
         toolbar_divider_2.pack(side=tk.LEFT, fill=tk.Y, padx=2)
 
         self.cmap_cbo = ttk.Combobox(self.toolbar, values=self.cmap_options)
-        ToolTip(self.gather_cbo, msg="Colormap", delay=1.0)
+        ToolTip(self.cmap_cbo, msg="Colormap", delay=1.0)
         self.cmap_cbo.current(0)
         self.cmap_cbo.pack(side=tk.LEFT, padx=10)
         self.cmap_cbo.bind("<<ComboboxSelected>>", self._change_colormap)
