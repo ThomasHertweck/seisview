@@ -69,7 +69,7 @@ Here is a screenshot of the GUI with some explanations:
 
 <p align="center">
 
-![seisview GUI](./img/seisview.jpg)
+![seisview GUI](https://gitlab.kit.edu/thomas.hertweck/seisview/-/raw/main/img/seisview.jpg)
 
 </p>
 
