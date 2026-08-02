@@ -91,6 +91,7 @@ class DataViewer:
         # I/O options
         self.filetype = None
         self.endian = None
+        self.fixed = None
         self.thdef = None
         self.format = None
         self.thext1 = False
@@ -425,26 +426,32 @@ class DataViewer:
         format_cbo.grid(row=5, column=1, padx=10, pady=5)
         format_cbo["state"] = "readonly"
 
+        fixed_bool = tk.BooleanVar(value=False)
+        ttk.Label(popup, text="Fixed trace length?").grid(row=6, column=0, padx=10, pady=5, sticky="w")
+        fixed_chk = tk.Checkbutton(popup, text="", variable=fixed_bool)
+        ToolTip(fixed_chk, msg="Tick if all traces have same length.", delay=1.0)
+        fixed_chk.grid(row=6, column=1, padx=10, pady=5)
+
         thext1_bool = tk.BooleanVar(value=False)
-        ttk.Label(popup, text="Trace header extension 1 used?").grid(row=6, column=0, padx=10, pady=5, sticky="w")
+        ttk.Label(popup, text="Trace header extension 1 used?").grid(row=7, column=0, padx=10, pady=5, sticky="w")
         thext1_chk = tk.Checkbutton(popup, text="", variable=thext1_bool)
         ToolTip(thext1_chk, msg="Tick for 'yes'", delay=1.0)
-        thext1_chk.grid(row=6, column=1, padx=10, pady=5)
+        thext1_chk.grid(row=7, column=1, padx=10, pady=5)
 
-        ttk.Label(popup, text="No. of add. textual header records:").grid(row=7, column=0, padx=10, pady=5, sticky="w")
+        ttk.Label(popup, text="No. of add. textual header records:").grid(row=8, column=0, padx=10, pady=5, sticky="w")
         txtrec_entry = ttk.Entry(popup, width=25)
         ToolTip(txtrec_entry, msg="Enter integer number if not detected by automatically", delay=1.0)
-        txtrec_entry.grid(row=7, column=1, padx=10, pady=5)
+        txtrec_entry.grid(row=8, column=1, padx=10, pady=5)
 
-        ttk.Label(popup, text="No. of add. trailer records:").grid(row=8, column=0, padx=10, pady=5, sticky="w")
+        ttk.Label(popup, text="No. of add. trailer records:").grid(row=9, column=0, padx=10, pady=5, sticky="w")
         txtrail_entry = ttk.Entry(popup, width=25)
         ToolTip(txtrail_entry, msg="Enter integer number if not detected by automatically", delay=1.0)
-        txtrail_entry.grid(row=8, column=1, padx=10, pady=5)
+        txtrail_entry.grid(row=9, column=1, padx=10, pady=5)
 
         info2_lbl = ttk.Label(popup, text="Note: seisio has more parameters than can be set through this GUI.", justify="center", style="RedText.TLabel")
-        info2_lbl.grid(row=9, column=0, columnspan=2, padx=10, pady=5, sticky="w")
+        info2_lbl.grid(row=10, column=0, columnspan=2, padx=10, pady=5, sticky="w")
         info3_lbl = ttk.Label(popup, text="Under normal circumstances, none of these parameters are required.", justify="center", style="RedText.TLabel")
-        info3_lbl.grid(row=10, column=0, columnspan=2, padx=10, pady=5, sticky="w")
+        info3_lbl.grid(row=11, column=0, columnspan=2, padx=10, pady=5, sticky="w")
 
         def save_close():
             """Save changes from seisio options."""
@@ -479,6 +486,12 @@ class DataViewer:
                 val = fmt.split("::")
                 self.format = self._safe_num(val[0].strip(), fallback=5)
 
+            fixed = fixed_bool.get()
+            if fixed:
+                self.fixed = True
+            else:
+                self.fixed = None
+
             self.thext1 = thext1_bool.get()
             self.log.debug("selected thext1: %s", self.thext1)
 
@@ -501,10 +514,10 @@ class DataViewer:
 
         # cancel button
         cancel_btn = ttk.Button(popup, text="Cancel", command=popup.destroy)
-        cancel_btn.grid(row=11, column=0, columnspan=1, pady=15)
+        cancel_btn.grid(row=12, column=0, columnspan=1, pady=15)
         # apply button
         apply_btn = ttk.Button(popup, text="Save & Close", command=save_close)
-        apply_btn.grid(row=11, column=1, columnspan=1, pady=15)
+        apply_btn.grid(row=12, column=1, columnspan=1, pady=15)
 
     def _plot_options(self):
         """Display plot options."""
@@ -820,7 +833,7 @@ class DataViewer:
             self.log.debug("calling seisio with ntxtrail: %s", self.ntxtrail)
             self.sio = seisio.input(self.file_path, filetype=self.filetype, format=self.format,
                                     endian=self.endian, thdef=self.thdef, thext1=self.thext1,
-                                    ntxtrec=self.ntxtrec, ntxtrail=self.ntxtrail)
+                                    ntxtrec=self.ntxtrec, ntxtrail=self.ntxtrail, fixed=self.fixed)
             self.nt = self.sio.ntraces
             self.ns = self.sio.nsamples
             self.t = self.sio.vaxis
