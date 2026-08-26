@@ -21,8 +21,7 @@ from matplotlib import rcParams
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.ticker import MultipleLocator, AutoLocator, MaxNLocator
 from tkinter import ttk
-# from ttkbootstrap_icons_fa import FAIcon
-from ttkbootstrap_icons_bs import BootstrapIcon
+from tkinter_icons import BootstrapIcon
 from tktooltip import ToolTip
 
 from . import __version__, __author__

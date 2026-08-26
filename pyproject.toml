@@ -36,9 +36,7 @@ dependencies = [
   "seisio",
   "tabulate",
   "tkinter-tooltip",
-  "ttkbootstrap", 
-  "ttkbootstrap-icons", 
-  "ttkbootstrap-icons-bs",
+  "tkinter-icons[bootstrap]",
 ]
 
 keywords = [
