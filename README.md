@@ -20,7 +20,7 @@ This little program is not meant to replace graphics workstations and commercial
 
 ### Dependencies
 
-Required: matplotlib, numpy, seisio, tabulate, tkinter-tooltip, ttkbootstrap, ttkbootstrap-icons, ttkbootstrap-icons-bs
+Required: matplotlib, numpy, seisio, tabulate, tkinter-tooltip, tkinter-icons[bootstrap]
 
 The **seisio** packages requires: numba, numpy, pandas, tabulate
 
